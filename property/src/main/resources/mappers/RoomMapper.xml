@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.property.dao.RoomDao">
+	<select id="selectById" resultType="Room">
+		SELECT
+		`id`,
+		`name`,
+		`hid`,
+		`uid`,
+		`area`,
+		`uname`
+		FROM `property`.`room` where id = #{id}
+	</select>
+	<select id="selectAll" resultType="Room">
+		SELECT
+		`id`,
+		`name`,
+		`hid`,
+		`uid`,
+		`area`,
+		`uname`
+		FROM `property`.`room`
+	</select>
+	<select id="selectByUserId" resultType="Room">
+		SELECT
+		`id`,
+		`name`,
+		`hid`,
+		`uid`,
+		`area`,
+		`uname`
+		FROM `property`.`room`
+		where uid = #{uid}
+	</select>
+	<select id="selectByHouseId" resultType="Room">
+		SELECT
+		`id`,
+		`name`,
+		`hid`,
+		`uid`,
+		`area`,
+		`uname`
+		FROM `property`.`room`
+		where hid = #{hid}
+	</select>
+	<insert id="add">
+		INSERT INTO `property`.`room`
+		(
+		`name`,
+		`hid`,
+		`uid`,
+		`area`,
+		`uname`)
+		VALUES (#{name},#{hid},#{uid},#{area},#{uname}
+		);
+	</insert>
+	<update id="update">
+		UPDATE `property`.`room`
+		<set>
+			<if test="name!=null">name=#{name},</if>
+			<if test="hid!=null">hid=#{hid},</if>
+			<if test="uid!=null">uid=#{uid},</if>
+			<if test="area!=null">area=#{area},</if>
+			<if test="uname!=null">uname=#{uname}</if>
+		</set>
+		WHERE `id` = #{id}
+	</update>
+	<delete id="delete">
+		DELETE
+		FROM `property`.`room`
+		WHERE `id` = #{id}
+	</delete>
+
+</mapper>
+  

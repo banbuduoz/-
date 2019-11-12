@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.property.dao.ChargeDao">
+	<insert id="add">
+		INSERT INTO `property`.`charge`
+		(
+		`name`,
+		`chargeinfo`)
+		VALUES (
+		#{name},
+		#{chargeinfo})
+	</insert>
+	<delete id="delete">
+		DELETE
+		FROM `property`.`charge`
+		WHERE `id` = #{id}
+	</delete>
+	<update id="update">
+		UPDATE `property`.`charge`
+		<set>
+			<if test="name!=null">name=#{name},</if>
+			<if test="chargeinfo!=null">chargeinfo=#{chargeinfo}</if>
+		</set>
+		WHERE `id` =#{id}
+	</update>
+	<select id="select" resultType="com.property.bean.Charge">
+		SELECT
+		`id`,
+		`name`,
+		`chargeinfo`
+		FROM `property`.`charge`
+	    where `id`=#{id}
+	</select>
+	<select id="selectAll" resultType="com.property.bean.Charge">
+		SELECT
+		`id`,
+		`name`,
+		`chargeinfo`
+		FROM `property`.`charge`
+	</select>
+</mapper>

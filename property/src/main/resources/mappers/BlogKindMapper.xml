@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.property.dao.BlogKindDao">
+	<insert id="add">
+		INSERT INTO `property`.`blogkind`
+		(`id`,
+		`name`)
+		VALUES
+		(#{id},
+		#{name})
+	</insert>
+	<delete id="delete">
+		DELETE
+		FROM `property`.`blogkind`
+		WHERE `id` = #{id}
+	</delete>
+	<update id="update">
+		UPDATE `property`.`blogkind`
+		<set>
+		<if test="name!=null">`name`=#{name}</if>
+		</set>
+		WHERE
+		`id` = #{id}
+	</update>
+	<select id="select" resultType="com.property.bean.BlogKind">
+		SELECT
+		`id`,
+		`name`
+		FROM
+		`property`.`blogkind` where `id`=#{id}
+	</select>
+	<select id="selectAll" resultType="com.property.bean.BlogKind">
+		SELECT
+		`id`,
+		`name`
+		FROM `property`.`blogkind`
+	</select>
+</mapper>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.property.dao.HouseDao">
+	<select id="selectAll" resultType="House">
+		SELECT
+		`id`,
+		`name`,
+		`buildstarttime`,
+		`buildendtime`,
+		`area`,
+		`info`
+		FROM `property`.`house`
+	</select>
+
+	<select id="selectByHouseId" resultType="House">
+		SELECT
+		`id`,
+		`name`,
+		`buildstarttime`,
+		`buildendtime`,
+		`area`,
+		`info`
+		FROM `property`.`house`
+		where id = #{id}
+	</select>
+	<update id="update">
+		update `property`.`house`
+		<set>
+			<if test="name!=null">name=#{name},</if>
+			<if test="buildstarttime!=null">buildstarttime=#{buildstarttime},</if>
+			<if test="buildendtime!=null">buildendtime=#{buildendtime},</if>
+			<if test="area!=null">area=#{area},</if>
+			<if test="info!=null">info=#{info}</if>
+		</set>
+		WHERE `id` =#{id}
+	</update>
+	<insert id="add">
+		INSERT INTO `property`.`house`
+		(`name`,
+		`buildstarttime`,
+		`buildendtime`,
+		`area`,
+		`info`)
+		VALUES
+		(#{name},#{buildstarttime},#{buildendtime},#{area},#{info}
+		);
+	</insert>
+	<delete id="delete">
+		DELETE
+		FROM `property`.`house`
+		WHERE `id` = #{id}
+	</delete>
+</mapper>

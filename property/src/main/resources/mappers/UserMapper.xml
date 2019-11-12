@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.property.dao.UserDao">
+	<select id="selectById" parameterType="int" resultType="User">
+		SELECT
+		`id`,
+		`name`,
+		`loginname`,
+		`pass`,
+		`tel`,
+		`sex`,
+		`buildingurl`,
+		`inputdate`,
+		`ip`,
+		`age`,
+		`houseid`,
+		`roomid`,
+		`roleid`,
+		`userurl`
+		FROM `property`.`user`
+		where id=#{id}
+	</select>
+	<select id="selectByLoginPass" resultType="User">
+		select * from user
+		where loginname =#{loginname} and pass=#{pass}
+	</select>
+
+	<select id="selectByLoginName" resultType="User">
+		select * from user
+		where loginname =#{loginname}
+	</select>
+
+	<select id="selectByName" resultType="User">
+		SELECT
+		`id`,
+		`name`,
+		`loginname`,
+		`pass`,
+		`tel`,
+		`sex`,
+		`buildingurl`,
+		`inputdate`,
+		`ip`,
+		`age`,
+		`houseid`,
+		`roomid`,
+		`roleid`,
+		`userurl`
+		FROM `property`.`user` where
+		`name` like '${name}%'
+	</select>
+	<select id="selectAll" resultType="User">
+		SELECT
+		`id`,
+		`name`,
+		`loginname`,
+		`pass`,
+		`tel`,
+		`sex`,
+		`buildingurl`,
+		`inputdate`,
+		`ip`,
+		`age`,
+		`houseid`,
+		`roomid`,
+		`roleid`,
+		`userurl`
+		FROM `property`.`user` where `id`
+		!= 85
+	</select>
+	<select id="selectByRoId" resultType="User">
+		SELECT
+		`id`,
+		`name`,
+		`loginname`,
+		`pass`,
+		`tel`,
+		`sex`,
+		`buildingurl`,
+		`inputdate`,
+		`ip`,
+		`age`,
+		`houseid`,
+		`roomid`,
+		`roleid`,
+		`userurl`
+		FROM `property`.`user` where
+		`roleid` =#{roleid}
+	</select>
+	<select id="selectByHouseId" resultType="User">
+		SELECT
+		`id`,
+		`name`,
+		`loginname`,
+		`pass`,
+		`tel`,
+		`sex`,
+		`buildingurl`,
+		`inputdate`,
+		`ip`,
+		`age`,
+		`houseid`,
+		`roomid`,
+		`roleid`,
+		`userurl`
+		FROM `property`.`user`
+		where
+		`houseid` =#{houseid}
+	</select>
+	<select id="selectByRoomId" resultType="User">
+		SELECT
+		`id`,
+		`name`,
+		`loginname`,
+		`pass`,
+		`tel`,
+		`sex`,
+		`buildingurl`,
+		`inputdate`,
+		`ip`,
+		`age`,
+		`houseid`,
+		`roomid`,
+		`roleid`,
+		`userurl`
+		FROM `property`.`user`
+		where
+		`roomid` =#{roomid}
+	</select>
+	<update id="update">
+		UPDATE `property`.`user`
+		<set>
+			<if test="name!=null">`name` =#{name},</if>
+			<if test="loginname!=null"> `loginname` =#{loginname},</if>
+			<if test="pass!=null">`pass` = #{pass},</if>
+			<if test="tel!=null">`tel` =#{tel},</if>
+			<if test="sex!=null"> `sex` =#{sex},</if>
+			<if test="buildingurl!=null"> `buildingurl` = #{buildingurl},</if>
+			<if test="age!=null">`age` =#{age},</if>
+			<if test="houseid!=null">`houseid` =#{houseid},</if>
+			<if test="roomid!=null">`roomid` =#{roomid},</if>
+			<if test="roleid!=null">`roleid` =#{roleid},</if>
+			<if test="userurl!=null">`userurl` = #{userurl}</if>
+		</set>
+		WHERE `id` = #{id}
+	</update>
+	<insert id="add">
+		INSERT INTO `property`.`user`
+		( `loginname`,
+		`pass`,
+		`inputdate`,
+		`ip`,
+		`roleid`
+		)
+		VALUES (#{loginname},
+		#{pass},
+		#{inputdate},
+		#{ip},
+		#{roleid})
+	</insert>
+	<delete id="delete">
+		DELETE
+		FROM `property`.`user`
+		WHERE `id` = #{id}
+	</delete>
+	<select id="selectByName2" resultType="User">
+		SELECT
+		`id`,
+		`name`,
+		`loginname`,
+		`pass`,
+		`tel`,
+		`sex`,
+		`buildingurl`,
+		`inputdate`,
+		`ip`,
+		`age`,
+		`houseid`,
+		`roomid`,
+		`roleid`,
+		`userurl`
+		FROM `property`.`user`
+		where
+		name
+		=#{name}
+	</select>
+</mapper>

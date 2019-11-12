@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.property.dao.PayDao">
+	<select id="selectByPaymonth" resultType="Pay">
+		SELECT
+		`id`,
+		`chargename`,
+		`uid`,
+		`paystate`,
+		`chargestandard`,
+		`payreal`,
+		`paybalance`,
+		`chargetime`,
+		`paymonth`
+		FROM `property`.`pay`
+		where
+		paymonth = #{paymonth}
+	</select>
+	<select id="selectAll" resultType="Pay">
+		SELECT
+		`id`,
+		`chargename`,
+		`uid`,
+		`paystate`,
+		`chargestandard`,
+		`payreal`,
+		`paybalance`,
+		`chargetime`,
+		`paymonth`
+		FROM `property`.`pay`
+	</select>
+	<select id="selectByUserId" resultType="Pay">
+		SELECT
+		`id`,
+		`chargename`,
+		`uid`,
+		`paystate`,
+		`chargestandard`,
+		`payreal`,
+		`paybalance`,
+		`chargetime`,
+		`paymonth`
+		FROM `property`.`pay`
+		where uid= #{uid}
+	</select>
+	<insert id="add">
+		INSERT INTO `property`.`pay`
+		(`chargename`,
+		`uid`,
+		`paystate`,
+		`chargestandard`,
+		`payreal`,
+		`paybalance`,
+		`chargetime`,
+		`paymonth`)
+		VALUES (#{chargename},
+		#{uid},
+		#{paystate},
+		#{chargestandard},
+		#{payreal},
+		#{paybalance},
+		#{chargetime},
+		#{paymonth}
+		)
+	</insert>
+	<update id="update">
+		UPDATE `property`.`pay`
+		<set>
+			<if test="chargename!=null">chargename=#{chargename},</if>
+			<if test="uid!=null">uid=#{uid},</if>
+			<if test="paystate!=null">paystate=#{paystate},</if>
+			<if test="chargestandard!=null">chargestandard=#{chargestandard},</if>
+			<if test="payreal!=null">payreal=#{payreal},</if>
+			<if test="paybalance!=null">paybalance=#{paybalance},</if>
+			<if test="chargetime!=null">chargetime=#{chargetime},</if>
+			<if test="paymonth!=null">paymonth=#{paymonth}</if>
+		</set>
+		WHERE `id` = #{id}
+	</update>
+	<delete id="delete">
+		DELETE
+		FROM `property`.`pay`
+		WHERE `id` = #{id}
+	</delete>
+	<select id="selectById" resultType="Pay">
+		SELECT
+		`id`,
+		`chargename`,
+		`uid`,
+		`paystate`,
+		`chargestandard`,
+		`payreal`,
+		`paybalance`,
+		`chargetime`,
+		`paymonth`
+		FROM `property`.`pay`
+		where id=
+		#{id}
+	</select>
+</mapper>

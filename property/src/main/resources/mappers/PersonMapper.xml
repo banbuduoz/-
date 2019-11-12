@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.property.dao.PersonDao">
+	<select id="selectAll" resultType="Person">
+		SELECT
+		`id`,
+		`name`,
+		`tel`,
+		`intime`,
+		`outtime`,
+		`visitname`,
+		`info`,
+		`uid`
+		FROM `property`.`person` order by id desc
+	</select>
+	<select id="selectByUserId" resultType="Person">
+		SELECT
+		`id`,
+		`name`,
+		`tel`,
+		`intime`,
+		`outtime`,
+		`visitname`,
+		`info`,
+		`uid`
+		FROM `property`.`person`
+		where uid =
+		#{uid}
+	</select>
+	<insert id="add">
+		INSERT INTO `property`.`person`
+		(`name`,
+		`tel`,
+		`intime`,
+		`visitname`,
+		`info`,
+		`uid`)
+		VALUES (#{name},
+		#{tel},
+		#{intime},
+		#{visitname},
+		#{info},
+		#{uid})
+	</insert>
+	<update id="update">
+		UPDATE `property`.`person`
+		<set>
+			<if test="name!=null">name=#{name},</if>
+			<if test="tel!=null">tel=#{tel},</if>
+			<if test="intime!=null">intime=#{intime},</if>
+			<if test="outtime!=null">outtime=#{outtime},</if>
+			<if test="visitname!=null">visitname=#{visitname},</if>
+			<if test="info!=null">info=#{info},</if>
+			<if test="uid!=null">uid=#{uid}</if>
+		</set>
+		WHERE `id` = #{id}
+	</update>
+	<delete id="delete">
+		DELETE
+		FROM `property`.`person`
+		WHERE `id` = #{id}
+	</delete>
+	<select id="selectById" resultType="Person">
+		SELECT
+		`id`,
+		`name`,
+		`tel`,
+		`intime`,
+		`outtime`,
+		`visitname`,
+		`info`,
+		`uid`
+		FROM `property`.`person`
+		where id = #{id}
+	</select>
+</mapper>

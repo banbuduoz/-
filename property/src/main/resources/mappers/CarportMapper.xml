@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.property.dao.CarportDao">
+	<select id="select" resultType="com.property.bean.Carport">
+		SELECT
+		`total`,
+		`number`
+		FROM
+		`property`.`carport`
+
+	</select>
+	<update id="update">
+		UPDATE `property`.`carport`
+		<set>
+			<if test="number!=null">number=#{number}</if>
+		</set>
+
+	</update>
+</mapper>

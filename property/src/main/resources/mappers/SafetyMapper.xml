@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.property.dao.SafetyDao">
+	<insert id="add">
+		INSERT INTO `property`.`safety`
+		(
+		`safekid`,
+		`starttime`,
+		`endtime`,
+		`info`,
+		`uid`)
+		VALUES (
+		#{safekid},
+		#{starttime},
+		#{endtime},
+		#{info},
+		#{uid})
+	</insert>
+	<delete id="delete">
+		DELETE
+		FROM `property`.`safety`
+		WHERE `id` = #{id}
+	</delete>
+	<update id="update">
+		UPDATE `property`.`safety`
+		<set>
+			<if test="safekid!=null">safekid=#{safekid},</if>
+			<if test="starttime!=null">starttime=#{starttime},</if>
+			<if test="endtime!=null">endtime=#{endtime},</if>
+			<if test="info!=null">info=#{info},</if>
+			<if test="uid!=null">uid=#{uid}</if>
+		</set>
+		WHERE `id` =#{id}
+	</update>
+	<select id="selectAll" resultType="com.property.bean.Safety">
+		SELECT
+		`id`,
+		`safekid`,
+		`starttime`,
+		`endtime`,
+		`info`,
+		`uid`
+		FROM `property`.`safety`
+
+	</select>
+	<select id="selectByUserId" resultType="com.property.bean.Safety">
+		SELECT
+		`id`,
+		`safekid`,
+		`starttime`,
+		`endtime`,
+		`info`,
+		`uid`
+		FROM
+		`property`.`safety`
+		where
+		uid=#{uid}
+	</select>
+	<select id="selectByBySafekid" resultType="com.property.bean.Safety">
+		SELECT
+		`id`,
+		`safekid`,
+		`starttime`,
+		`endtime`,
+		`info`,
+		`uid`
+		FROM `property`.`safety`
+		where safekid = #{kid}
+	</select>
+</mapper>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.property.dao.ServiceDao">
+	<select id="selectAll" resultType="Service">
+		SELECT
+		`id`,
+		`title`,
+		`info`,
+		`uid`,
+		`sid`,
+		`starttime`,
+		`endtime`,
+		`appraise`,
+		`kindid`,
+		`result`
+		FROM
+		`property`.`service`
+	</select>
+	<select id="selectById" resultType="Service">
+		SELECT
+		`id`,
+		`title`,
+		`info`,
+		`uid`,
+		`sid`,
+		`starttime`,
+		`endtime`,
+		`appraise`,
+		`kindid`,
+		`result`
+		FROM
+		`property`.`service`
+		where id = #{id}
+	</select>
+	<select id="selectByKid" resultType="Service">
+		SELECT
+		`id`,
+		`title`,
+		`info`,
+		`uid`,
+		`sid`,
+		`starttime`,
+		`endtime`,
+		`appraise`,
+		`kindid`,
+		`result`
+		FROM
+		`property`.`service`
+		where kindid = #{kindid}
+	</select>
+	<select id="selectBySid" resultType="Service">
+		SELECT
+		`id`,
+		`title`,
+		`info`,
+		`uid`,
+		`sid`,
+		`starttime`,
+		`endtime`,
+		`appraise`,
+		`kindid`,
+		`result`
+		FROM
+		`property`.`service`
+		where sid = #{sid}
+	</select>
+	<select id="selectByUid" resultType="Service">
+		SELECT
+		`id`,
+		`title`,
+		`info`,
+		`uid`,
+		`sid`,
+		`starttime`,
+		`endtime`,
+		`appraise`,
+		`kindid`,
+		`result`
+		FROM
+		`property`.`service`
+		where uid = #{uid}
+	</select>
+	<insert id="add">
+		INSERT INTO `property`.`service`
+		(`title`,
+		`info`,
+		`uid`,
+		`sid`,
+		`starttime`,
+		`kindid`)
+		VALUES
+		(#{title},#{info},#{uid},#{sid},#{starttime},
+		#{kindid})
+	</insert>
+	<update id="update">
+		UPDATE `property`.`service`
+		<set>
+			<if test="title!=null">title=#{title},</if>
+			<if test="info!=null">info=#{info},</if>
+			<if test="uid!=null">uid=#{uid},</if>
+			<if test="sid!=null">sid=#{sid},</if>
+			<if test="starttime!=null">starttime=#{starttime},</if>
+			<if test="endtime!=null">endtime=#{endtime},</if>
+			<if test="appraise!=null">appraise=#{appraise},</if>
+			<if test="kindid!=null">kindid=#{kindid},</if>
+			<if test="result!=null">result=#{result}</if>
+		</set>
+		WHERE `id` = #{id}
+	</update>
+	<delete id="delete">
+		DELETE
+		FROM `property`.`service`
+		WHERE `id` in
+		<foreach collection="array" item="id" open="(" separator=","
+			close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

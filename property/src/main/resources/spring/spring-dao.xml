@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	<!-- 获取数据库配置文件 -->
+	<context:property-placeholder location="classpath:database.properties" />
+
+	<!-- 使用dbcp连接池创建连接获取数据源 -->
+	<bean class="org.apache.commons.dbcp.BasicDataSource" id="dataSource">
+		<property name="driverClassName" value="${driver}"></property>
+		<property name="url" value="${url}"></property>
+		<property name="username" value="${password}"></property>
+		<property name="password" value="${password}"></property>
+		<property name="initialSize" value="${initialSize}" />
+		<property name="maxActive" value="${maxActive}" />
+		<property name="maxIdle" value="${maxIdle}" />
+		<property name="minIdle" value="${minIdle}" />
+		<property name="maxWait" value="${maxWait}" />
+		<property name="removeAbandonedTimeout" value="${removeAbandonedTimeout}" />
+		<property name="removeAbandoned" value="${removeAbandoned}" />
+	</bean>
+
+	<!-- 配置sqlsessionfactory -->
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
+		<!-- 获取数据源 -->
+		<property name="dataSource" ref="dataSource"></property>
+		<!-- 配置mybatis-configLocation -->
+		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+		<!-- 配置sql.xml扫描器mapperLocations -->
+		<property name="mapperLocations" value="classpath:mappers/*.xml"></property>
+	</bean>
+
+	<!-- 配置dao层接口扫描器 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!-- 配置扫描包 -->
+		<property name="basePackage" value="com.property.dao"></property>
+	</bean>
+
+</beans>

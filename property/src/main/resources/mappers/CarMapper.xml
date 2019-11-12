@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.property.dao.CarDao">
+	<insert id="add">
+		INSERT INTO `property`.`car`
+		(
+		`carnum`,
+		`intime`,
+		`outtime`,
+		`pay`,
+		`info`,
+		`uid`)
+		VALUES (
+		#{carnum},
+		#{intime},
+		#{outtime},
+		#{pay},
+		#{info},
+		#{uid});
+	</insert>
+	<delete id="delete">
+		DELETE
+		FROM `property`.`car`
+		WHERE `id` =#{id}
+	</delete>
+	<update id="update">
+		UPDATE `property`.`car`
+		<set>
+			<if test="carnum!=null">`carnum`=#{carnum},</if>
+			<if test="intime!=null">`intime`=#{intime},</if>
+			<if test="outtime!=null">`outtime`=#{outtime},</if>
+			<if test="pay!=null">`pay`=#{pay},</if>
+			<if test="info!=null">`info`=#{info},</if>
+			<if test="uid!=null">`uid`=#{uid}</if>
+		</set>
+		WHERE `id` = #{id}
+	</update>
+	<select id="selectAll" resultType="com.property.bean.Car">
+
+		SELECT
+		`id`,
+		`carnum`,
+		`intime`,
+		`outtime`,
+		`pay`,
+		`info`,
+		`uid`
+		FROM `property`.`car` order by id desc
+	</select>
+	<select id="selectByUserId" resultType="com.property.bean.Car">
+		SELECT
+		`id`,
+		`carnum`,
+		`intime`,
+		`outtime`,
+		`pay`,
+		`info`,
+		`uid`
+		FROM
+		`property`.`car`
+		where
+		`uid`=#{uid}
+	</select>
+	<select id="selectByCarnum" resultType="com.property.bean.Car">
+		SELECT
+		`id`,
+		`carnum`,
+		`intime`,
+		`outtime`,
+		`pay`,
+		`info`,
+		`uid`
+		FROM
+		`property`.`car`
+	</select>
+	<select id="selectById" resultType="com.property.bean.Car">
+		SELECT
+		`id`,
+		`carnum`,
+		`intime`,
+		`outtime`,
+		`pay`,
+		`info`,
+		`uid`
+		FROM `property`.`car` where id =
+		#{id}
+	</select>
+</mapper>

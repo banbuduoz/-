@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.property.dao.UserFamilyDao">
+	<select id="selectById" parameterType="int" resultType="UserFamily">
+		SELECT
+		`id`,
+		`name`,
+		`sex`,
+		`tel`,
+		`relation`,
+		`uid`
+		FROM `property`.`userfamily`
+		WHERE id=#{id}
+	</select>
+	<select id="selectAll" resultType="UserFamily">
+		SELECT
+		`id`,
+		`name`,
+		`sex`,
+		`tel`,
+		`relation`,
+		`uid`
+		FROM `property`.`userfamily`
+	</select>
+	<select id="selectByUid" parameterType="int" resultType="UserFamily">
+		SELECT
+		`id`,
+		`name`,
+		`sex`,
+		`tel`,
+		`relation`,
+		`uid`
+		FROM `property`.`userfamily`
+		where uid=#{uid}
+	</select>
+	<update id="update">
+		UPDATE `property`.`userfamily`
+		<set>
+			<if test="name!=null">`name` =#{name},</if>
+			<if test="sex!=null">`sex` =#{sex},</if>
+			<if test="tel!=null">`tel` =#{tel},</if>
+			<if test="relation!=null">`relation` =#{relation}</if>
+		</set>
+		WHERE `id` =#{id}
+	</update>
+	<delete id="delete">
+		DELETE
+		FROM `property`.`userfamily`
+		WHERE `id` = #{id}
+	</delete>
+	<insert id="add">
+		INSERT INTO `property`.`userfamily`
+		(`name`,
+		`sex`,
+		`tel`,
+		`relation`,
+		`uid`)
+		VALUES (#{name},
+		#{sex},
+		#{tel},
+		#{relation},
+		#{uid})
+	</insert>
+</mapper>

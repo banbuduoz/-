@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.property.dao.BlogDao">
+	<select id="selectBykidShowTwo" resultType="Blog">
+		SELECT
+		`id`,
+		`kid`,
+		`uid`,
+		`title`,
+		`content`,
+		`datetime`
+		FROM `property`.`blog` where kid =
+		#{kid}
+		LIMIT 0, 2
+	</select>
+
+	<select id="selectBykidShowEight" resultType="Blog">
+		SELECT
+		`id`,
+		`kid`,
+		`uid`,
+		`title`,
+		`content`,
+		`datetime`
+		FROM `property`.`blog` where kid =
+		#{kid}
+		LIMIT 0, 8
+	</select>
+	<select id="selectAll" resultType="Blog">
+		SELECT
+		`id`,
+		`kid`,
+		`uid`,
+		`title`,
+		`content`,
+		`datetime`
+		FROM `property`.`blog`
+	</select>
+	<select id="selectListByKindId" resultType="Blog">
+		SELECT
+		`id`,
+		`kid`,
+		`uid`,
+		`title`,
+		`content`,
+		`datetime`
+		FROM `property`.`blog` where kid =
+		#{kid}
+	</select>
+	<select id="selectListByUserId" resultType="Blog">
+		SELECT
+		`id`,
+		`kid`,
+		`uid`,
+		`title`,
+		`content`,
+		`datetime`
+		FROM `property`.`blog` where uid =
+		#{uid}
+	</select>
+	<select id="selectById" resultType="Blog">
+		SELECT
+		`id`,
+		`kid`,
+		`uid`,
+		`title`,
+		`content`,
+		`datetime`
+		FROM `property`.`blog` where id =
+		#{id}
+	</select>
+	<update id="update">
+		update `property`.`blog`
+		<set>
+			<if test="kid!=null">`kid` = #{kid},</if>
+			<if test="uid!=null">uid = #{uid},</if>
+			<if test="title!=null">title = #{title},</if>
+			<if test="content!=null">content = #{content},</if>
+			<if test="datetime!=null">datetime = #{datetime},</if>
+			<if test="title!=null">title = #{title}</if>
+		</set>
+		where id = #{id}
+	</update>
+	<insert id="add">
+		INSERT INTO `property`.`blog`
+		(`kid`,
+		`uid`,
+		`title`,
+		`content`,
+		`datetime`)
+		VALUES (
+		#{kid},
+		#{uid},
+		#{title},
+		#{content},
+		#{datetime})
+	</insert>
+	<delete id="delete">
+		DELETE
+		FROM `property`.`blog`
+		WHERE `id` in
+		<foreach collection="array" index="id" open="(" separator=","
+			close=")">
+			#{id}
+		</foreach>
+	</delete>
+</mapper>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.property.dao.RoleDao">
+	<select id="selectAll" resultType="Role">
+		SELECT
+		`id`,
+		`name`
+		FROM
+		`property`.`role`
+	</select>
+	<select id="selectById" resultType="Role">
+		SELECT
+		`id`,
+		`name`
+		FROM
+		`property`.`role`
+		where id = #{id}
+	</select>
+	<insert id="add">
+		INSERT INTO `property`.`role`
+		(`name`)
+		VALUES (#{name})
+	</insert>
+	<update id="update">
+		UPDATE `property`.`role`
+		<set>
+			<if test="name!=null">name=#{name}</if>
+		</set>
+		WHERE `id` = #{id}
+	</update>
+	<delete id="delete">
+		DELETE
+		FROM `property`.`role`
+		WHERE `id` = #{id}
+	</delete>
+
+</mapper>
